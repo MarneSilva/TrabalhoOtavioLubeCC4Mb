@@ -1,5 +1,5 @@
 # Berçário
-  Sistema que manuseia dados de um berçário. Possui tabelas que instaciam objetos com características como: nome, aata de nascimento, altura, etc. Cada tabela é associada com a outra, a fim de proporcionar o bom funcionamento do sistema.
+  Sistema que manuseia dados de um berçário. Possui tabelas que instanciam objetos com características como: nome, data de nascimento, altura, etc. Cada tabela é associada com a outra, a fim de proporcionar o bom funcionamento do sistema.
 
 # Passos para iniciar o projeto Node e Typescript
 
