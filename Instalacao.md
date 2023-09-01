@@ -64,3 +64,45 @@ import { PrismaClient } from '@prisma/client/edge'
 const prisma = new PrismaClient()
 
 Caso o seu editor de texto apresente algum erro na linha de código da importação do Prisma Client, significa que você pulou alguma parte das etapas, e o Prisma não foi instalado corretamente. Revise as etapas a procura de alguma que tenha passado despercebido, e caso não encontre, tente também pesquisar o seu erro na internet ou recomeçar um novo projeto.
+
+# Como utilizar queries e conectar o banco de dados
+
+## Use o Prisma Migrate para criar o banco de dados
+npx prisma migrate dev --name init
+
+**IMPORTANTE:** A pasta prisma.rar já possui uma migração feita em seu histórico, mas realize o comando novamente, com o modelo lógico desejado no esquema do prisma.
+
+## Escreva queries de criação de tabelas e inserção de dados no arquivo Typescript desejado
+Siga esta estrutura:
+
+import { PrismaClient } from '@prisma/client'
+import { create } from 'domain'
+const prisma = new PrismaClient()
+
+async function main() {
+    const Example = await prisma.example.create({
+      data: { // Campos da table }
+    })
+    // Insira aqui todas as queries parecidas com esta acima
+}
+// Mandar as queries para o banco de dados
+main()
+    // O que fazer depois da promessa retornar (as queries serem enviadas)
+    .then(async () => {
+    await prisma.$disconnect()
+    })
+    // Catch para demonstrar o erro no console
+    .catch(async (e) => {
+    console.error(e)
+    await prisma.$disconnect()
+    process.exit(1)
+})
+
+## Rode com a aplicação do ts-node no terminal
+Entre no diretório em que se encontra o seu arquivo Typescript. No caso do projeto, é o diretório src dentro da pasta Typescript.
+cd .\src\
+Depois disso, rode no terminal o código:
+npx ts-node bercario.ts
+Substitua bercario.ts pelo nome do seu arquivo Typescript com as queries. Para este projeto, o nome do arquivo se chama bercario.ts.
+Para visualizar os resultados, adicione o um console.log de uma constante no final da função assíncrona do seu arquivo Typescript.
+
